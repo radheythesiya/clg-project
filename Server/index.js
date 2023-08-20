@@ -5,7 +5,7 @@ const cors = require("cors")
 const bodyParser = require("body-parser")
 const app = express()
 const cookieParser = require("cookie-parser")
-
+app.use(express.urlencoded({extended:false}))
 app.use(cors())
 app.use(bodyParser.json())
 app.use(cookieParser())
@@ -14,7 +14,8 @@ app.use(cookieParser())
 // const AuthUser = require("./middleware/AuthUser")
 // app.use('/v1/*', AuthUser);
 
-
+const cart = require("./Routers/Cart")
+app.use('/cart',cart)
 //routes
 const Router = require("./Routers/MyRoute")
 app.use("/", Router)
