@@ -1,11 +1,11 @@
-const AdminModel = require('../models/Admin')
+
+import AdminModel from '../models/Admin.js';
 
 const AdminControl = async (req, res) => {
     const { email, password } = req.body;
 
     if (email && password) {
         const admin = await AdminModel.findOne({ email });
-        
         if (admin) {
             if (password === admin.password) {
                 res.status(201).json({ message: "Login Successfully" })
@@ -23,4 +23,4 @@ const AdminControl = async (req, res) => {
     }
 }
 
-module.exports = AdminControl;
+export default  AdminControl

@@ -18,7 +18,7 @@ import logo from "./diamond_logo.png"
 
 const Admin = ({ data }) => {
   const [search, setSearch] = useState(true)
-  const [slider, setSlider] = useState(true)
+  const [slider, setSlider] = useState(false)
 
 
 
@@ -29,19 +29,31 @@ const Admin = ({ data }) => {
       <div id="admin">
         <header>
           <div className="left">
-            <BiMenuAltLeft onClick={() => setSlider(!slider)} />
-            <img src={logo} alt="" width="40px"  />
-            <h5>MRP DIAMONDS</h5>
+            {/* <BiMenuAltLeft onClick={() => setSlider(!slider)} /> */}
+            <input id="checkbox" type="checkbox" onChange={()=>setSlider(!slider)} checked={slider}/>
+    <label class="toggle" for="checkbox">
+        <div id="bar1" class="bars"></div>
+        <div id="bar2" class="bars"></div>
+        <div id="bar3" class="bars"></div>
+    </label>
+            
+          </div>
+          <div className="centers">
+          <img src={logo} alt="" width="40px" />
+            <button data-text="Awesome" class="admin-heding-btn">
+              <span class="actual-text">&nbsp;MRP DIAMONDS &nbsp;</span>
+              
+            </button>
           </div>
           {/* <div className="cen">
            
           </div> */}
           <div className="right">
-            
-          <div className="search">
-        <input placeholder="Search..." type="text"/>
-        <button type="submit">Go</button>
-      </div>
+
+            {/* <div className="search">
+              <input placeholder="Search..." type="text" />
+              <button type="submit">Go</button>
+            </div> */}
 
 
             <img src={admin} alt=" " />
@@ -49,8 +61,7 @@ const Admin = ({ data }) => {
         </header>
 
         <main>
-
-          <AdminSlide slider={slider} />
+          <AdminSlide slider={slider} setSlider={setSlider} />
           <Routes>
             <Route path="/dashboard" element={<Dashboard slider={slider} />}></Route>
             <Route path="/managediamond" element={<AddDiamond slider={slider} />}></Route>
@@ -70,22 +81,22 @@ const Admin = ({ data }) => {
   )
 }
 
-const AdminSlide = ({ slider }) => {
+const AdminSlide = ({ slider,setSlider }) => {
   return (<>
     <div className="left-side" id={slider && 'showslide'} >
 
       <div className='slide-container'>
 
-        <NavLink to="/admins/dashboard"> <BiSolidDashboard />Dashboard</NavLink>
-        <NavLink to="/admins/customer">< BiUser />Customer</NavLink>
-        <NavLink to="/admins/diamonds"><BiSolidDiamond />Diamonds</NavLink>
-        <NavLink to="/admins/message"><BiMessage />Messages</NavLink>
-        <NavLink to="/admins/order"><BiStore />Orders</NavLink>
-        <NavLink to="/admins/report">< GoReport />Reports</NavLink>
-        <NavLink to="/admins/setting"><AiFillSetting />Settings</NavLink>
-        <NavLink to="/admins/faq"><BiQuestionMark />FAQ</NavLink>
-        <NavLink to="/admins/addproduct"><BiPlus />Add Diamond</NavLink>
-        <NavLink to="/admin" style={{ marginTop: '2rem' }}><BiLogOut />Logout</NavLink>
+        <NavLink to="/admins/dashboard" onClick={()=>setSlider(!slider)} > <BiSolidDashboard />Dashboard</NavLink>
+        <NavLink to="/admins/customer" onClick={()=>setSlider(!slider)}>< BiUser />Customer</NavLink>
+        <NavLink to="/admins/diamonds" onClick={()=>setSlider(!slider)}><BiSolidDiamond />Diamonds</NavLink>
+        <NavLink to="/admins/message" onClick={()=>setSlider(!slider)}><BiMessage />Feedback</NavLink>
+        <NavLink to="/admins/order" onClick={()=>setSlider(!slider)}><BiStore />Orders</NavLink>
+        {/* <NavLink to="/admins/report">< GoReport />Reports</NavLink> */}
+        {/* <NavLink to="/admins/setting"><AiFillSetting />Settings</NavLink> */}
+        {/* <NavLink to="/admins/faq"><BiQuestionMark />FAQ</NavLink> */}
+        <NavLink to="/admins/addproduct" onClick={()=>setSlider(!slider)}><BiPlus />Add Diamond</NavLink>
+        <NavLink to="/admin" style={{ marginTop: '2rem' }} onClick={()=>setSlider(!slider)}><BiLogOut />Logout</NavLink>
 
       </div>
     </div>

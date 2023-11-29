@@ -3,6 +3,7 @@ import "./AdminLogin.css"
 import axios from 'axios'
 import { useNavigate } from "react-router-dom"
 import { Toaster, toast } from 'react-hot-toast'
+import { AiFillEye } from 'react-icons/ai'
 
 const AdminLogin = () => {
     const [loginData, setLoginData] = useState({})
@@ -14,7 +15,7 @@ const AdminLogin = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        axios.post("http://localhost:4001/adminlogin", loginData)
+        axios.post("/adminlogin", loginData)
             .then((r) => {
                 if (r.status === 201) {
                     toast.success("Login Successfully")

@@ -1,23 +1,20 @@
-require("dotenv").config()
-const express = require("express")
-const mongoose = require("mongoose")
-const cors = require("cors")
-const bodyParser = require("body-parser")
+// require("dotenv").config()
+import dotenv from 'dotenv'
+dotenv.config();
+import  express  from 'express';
+import mongoose from 'mongoose';
+import cors from 'cors'
+import bodyParser from 'body-parser'
 const app = express()
-const cookieParser = require("cookie-parser")
-app.use(express.urlencoded({extended:false}))
+
+// basic middelwares 
+app.use(express.urlencoded({ extended: false }))
 app.use(cors())
 app.use(bodyParser.json())
-app.use(cookieParser())
 
-//middleware
-// const AuthUser = require("./middleware/AuthUser")
-// app.use('/v1/*', AuthUser);
-
-const cart = require("./Routers/Cart")
-app.use('/cart',cart)
 //routes
-const Router = require("./Routers/MyRoute")
+
+import Router from './Routers/MyRoute.js';
 app.use("/", Router)
 
 // mongo connect
@@ -25,18 +22,11 @@ try {
     mongoose.connect(process.env.URLATLAS);
     console.log("Database connected successfully")
 } catch (e) {
-    console.log(e)
+    console.log("error in Atalas Connection", e)
 }
 
 app.listen(process.env.PORT, () => {
     console.log("You are running on PORT", process.env.PORT)
 })
-
-
-
-
-
-
-
 
 

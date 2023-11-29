@@ -2,27 +2,50 @@ import React, { useState } from 'react';
 import "./style.css";
 import axios from "axios"
 import { Toaster, toast } from 'react-hot-toast';
+import Loader from "../../../common/Loader/Loader"
 const AddDiamond = ({ slider }) => {
-    const [ddata, setDdata] = useState({})
+    let [ddata, setDdata] = useState({})
+    const [selectedFile, setSelectedFile] = useState(null);
+    const [load,setLoad] = useState(false)
     const handlechange = (e) => {
         setDdata({ ...ddata, [e.target.name]: e.target.value })
     }
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios.post("http://localhost:4001/product", ddata)
+        setLoad(true)
+        // setLoad(true)
+        const formData = new FormData();
+        formData.append('imguri', selectedFile)
+        Object.keys(ddata).forEach((key) => {
+            formData.append(key, ddata[key]);
+           
+        });
+       
+        axios.post("/product", formData)
             .then((r) => {
-                if (r.status === 201) {
+                if (r.status == 201) {
+                    setLoad(false)
                     toast.success("Diamond added successfully !")
+                    setTimeout(() => {
+                       
+                        document.location.reload()
+                    }, 2000);
                 }
                 else {
+                    setLoad(false)
                     toast.error(r.data.message)
                 }
             })
-
     }
+
+
 
     return (
         <>
+            {
+                load?<Loader/> :
+           
+
             <div id='addDiamond' className='content-admin' style={{ marginLeft: slider && '20%' }}>
                 <h2> ADD DIAMONDS </h2>
                 <form action="" onSubmit={handleSubmit}>
@@ -60,9 +83,11 @@ const AddDiamond = ({ slider }) => {
                             <input type="number" name='price' onChange={handlechange} />
                         </div>
                         <div className="form-con">
-                            <span >Video url</span>
-                            <input type="text" name='threesixty' onChange={handlechange} />
+                            <span >Select Img</span>
+                            <input type="file" name='file' onChange={(e) => setSelectedFile(e.target.files[0])} />
                         </div>
+
+
                         <div className="form-con">
                             <span >Carat</span>
 
@@ -188,13 +213,15 @@ const AddDiamond = ({ slider }) => {
                         </div>
 
                     </div>
-                    <button type="submit" class="adminaddbtn">
-                        <span class="button__text">Add Diamond</span>
-                        <span class="button__icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" stroke="currentColor" height="24" fill="none" class="svg"><line y2="19" y1="5" x2="12" x1="12"></line><line y2="12" y1="12" x2="19" x1="5"></line></svg></span>
+                    <button type="submit" className="adminaddbtn">
+                        <span className="button__text">Add Diamond</span>
+                        <span className="button__icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" strokeWidth="2" strokeLinejoin ="round" strokeLinecap="round" stroke="currentColor" height="24" fill="none" className="svg"><line y2="19" y1="5" x2="12" x1="12"></line><line y2="12" y1="12" x2="19" x1="5"></line></svg></span>
                     </button>
                 </form>
             </div>
+}
             <Toaster />
+        
         </>
     )
 }

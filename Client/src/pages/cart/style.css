@@ -1,31 +1,48 @@
 #cart {
-margin-top: 5rem;
+    padding: 0 14rem;
+    .empty-cart {
+        text-align: center;
+        margin: 3em;
+
+        >.go-to-buy {
+
+            padding: 6px 10px;
+            background-color: green;
+            border-radius: 10px;
+            outline: none;
+            border: none;
+            margin-top: 2rem;
+        }
+    }
+
+    margin-top: 5rem;
+
     >main {
 
         >.product-list {
-            >h2{
-                padding-left:40px ;
+
+            >h2 {
+                padding-left: 40px;
                 color: var(--third-color);
                 border-bottom: 1px solid;
-               
-            }
-            max-width: 1000px;
 
-            margin-left: auto;
-            margin-right: auto;
-            padding-left: 10px;
-            padding-right: 40px;
+            }
+
+            /* max-width: 1000px; */
+
+        
 
             .col-1 {
-                flex-basis: 40%;
-                text-align: center;
-                display: flex;
-                justify-content: space-around;
+                flex-basis: 5%;
+               
             }
 
             .col-2 {
-                text-align: center;
-                flex-basis: 15%;
+               text-align: center;
+                flex-basis: 35%;
+                    gap: 1rem;
+                /* display: flex; */
+               
             }
 
             .col-3 {
@@ -45,7 +62,17 @@ margin-top: 5rem;
             }
 
             .col-5 {
-                flex-basis: 15%;
+                flex-basis: 10%;
+                text-align: center;
+
+            }
+            .col-5 {
+                flex-basis: 10%;
+                text-align: center;
+
+            }   
+            .col-6 {
+                flex-basis: 10%;
                 text-align: center;
 
             }
@@ -70,6 +97,7 @@ margin-top: 5rem;
             }
 
             >.responsive-table {
+            padding: unset !important;
                 >li {
                     border-radius: 3px;
                     padding: 25px 30px;
@@ -89,42 +117,63 @@ margin-top: 5rem;
                 >.table-row {
                     background-color: #ffffff;
                     box-shadow: 0px 0px 9px 0px rgba(0, 0, 0, 0.1);
-
+                    align-items: center;
+                    margin: 5px 0;
                 }
 
 
             }
 
             @media all and (max-width: 767px) {
-                .table-header {
-                    display: none;
-                }
+                
+              
+                >.responsive-table {
+                    padding: unset;
+                   overflow-x: scroll !important;
+                    .table-header {
+                        /* display: none; */
+                       width: 600px !important;
+                      
+                        font-size: 14px;
+                    }
 
-                .table-row {}
+                    .table-row {
+                        width: 600px !important;
+                        font-size: 15px;
+                    }
 
-                li {
-                    display: block;
-                }
+                    >li {
+                       /* background-color: aqua !important; */
+                       /* gap: 10px; */
+                       padding: unset !important;
+                       margin: auto; 
+                    }
 
-                .col {
 
-                    flex-basis: 100%;
 
-                }
+                    .col {
 
-                .col {
-                    display: flex;
-                    padding: 10px 0;
+                        /* flex-basis: 100%; */
 
-                    &:before {
-                        color: #6C7A89;
-                        padding-right: 10px;
-                        content: attr(data-label);
-                        flex-basis: 50%;
-                        text-align: right;
+                    }
+
+                    .col {
+                        /* display: flex; */
+
+
+                        &:before {
+                            color: #6C7A89;
+                            padding-right: 10px;
+                            content: attr(data-label);
+                            flex-basis: 50%;
+                            text-align: right;
+                        }
                     }
                 }
             }
         }
+    }
+    @media all and (max-width: 767px) {
+        padding: unset;
     }
 }
